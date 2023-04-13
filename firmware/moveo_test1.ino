@@ -3,27 +3,27 @@
 #include <MultiStepper.h>
 
 // Upper Wrist
-#define X_STEP_PIN         9
-#define X_DIR_PIN          8
+#define X_STEP_PIN         42
+#define X_DIR_PIN          43
 #define X_ENABLE_PIN       -1
 
 // Lower Wrist
-#define Y_STEP_PIN         6
-#define Y_DIR_PIN          5
+#define Y_STEP_PIN         50
+#define Y_DIR_PIN          51
 #define Y_ENABLE_PIN       -1
 
 // Elbow
-#define Z_STEP_PIN         11
-#define Z_DIR_PIN          10
+#define Z_STEP_PIN         46
+#define Z_DIR_PIN          47
 #define Z_ENABLE_PIN       -1
 
 // shoulder
-#define A_STEP_PIN         32 // red
-#define A_DIR_PIN          33 // blue
+#define A_STEP_PIN         34 // red
+#define A_DIR_PIN          35 // blue
 #define A_ENABLE_PIN       -1 // E0_ENABLE_PIN
 
-#define B_STEP_PIN         36 // E1_STEP_PIN
-#define B_DIR_PIN          37 // E1_DIR_PIN
+#define B_STEP_PIN         52 // E1_STEP_PIN
+#define B_DIR_PIN          53 // E1_DIR_PIN
 #define B_ENABLE_PIN       -1 // E1_ENABLE_PIN
 
 #define R_STEP_PIN         28 // red
@@ -44,8 +44,8 @@ AccelStepper StepperR(AccelStepper::DRIVER, R_STEP_PIN, R_DIR_PIN);
 
 
 //Current Motor config:
-// [X, Y, Z, A, B]
-// [Upper Wrist, Lower Wrist, Elbow, Shoulder, Base]
+// [X, Y, Z, A, B, R]
+// [Upper Wrist, Lower Wrist, Elbow, Shoulder, Base, Rail]
 
 // Up to 10 steppers can be handled as a group by MultiStepper
 MultiStepper steppers;
@@ -77,8 +77,8 @@ void setup()
   long positions[MULTISTEPPER_NUM_STEPPERS];
 
   // Configure stepper X - upper wrist
-  StepperX.setMaxSpeed(50);
-  StepperX.setSpeed(50);
+  StepperX.setMaxSpeed(100);
+  StepperX.setSpeed(100);
   StepperX.setEnablePin(X_ENABLE_PIN);
   // // Configure stepper Y - lower wrist
   StepperY.setMaxSpeed(33);
@@ -89,12 +89,12 @@ void setup()
   StepperZ.setSpeed(250);
   StepperZ.setEnablePin(Z_ENABLE_PIN);
   // Configure stepper A
-  StepperA.setMaxSpeed(30);
-  StepperA.setSpeed(30);
+  StepperA.setMaxSpeed(240);
+  StepperA.setSpeed(240);
   StepperA.setEnablePin(A_ENABLE_PIN);
   // // Configure stepper B
-  StepperB.setMaxSpeed(50);
-  StepperB.setSpeed(50);
+  StepperB.setMaxSpeed(400);
+  StepperB.setSpeed(400);
   StepperB.setEnablePin(B_ENABLE_PIN);
 
   // configure stepper R
