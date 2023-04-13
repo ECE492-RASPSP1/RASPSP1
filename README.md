@@ -1,8 +1,6 @@
 # RASPSP1
 Capstone Project - Robot Arm Satellite Positioning Simulator
 
-# Contribution guide
-
 ## Firmware
 - Change the stepper motors pinout definition to match your wiring
 - Flash the firmware to arduino
