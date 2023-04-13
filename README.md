@@ -3,68 +3,42 @@ Capstone Project - Robot Arm Satellite Positioning Simulator
 
 # Contribution guide
 
-## Branching
-<ol>
-    <li>
-    To create a branch, you will first need to clone the repository to a directory on your machine. Open a terminal in the directory you wish to place the  repository files and then type <code>git clone &lt;https link to repo&gt; </code> <br>
-    Example: <code>git commit https://github.com/dany-cpp/QuantumPermutationPad.git </code>
-    </li>
-    <li>
-    After you have cloned the repository, change your terminal directory to the repository you just cloned and type <code>git checkout -b &lt;name of your branch&gt; </code> <br>
-    Example: <code>git checkout -b MyName-new-branch </code> <br>
-    The checkout command switches your working branch, and the -b flag creates a new branch.
-    </li>
-    <li>
-    Branch, name, if linked to an issue, must contains the issue number in this format. For example "MP-10" for PR linked to issue #10. 
-    </li>
-    <li>
-    You can check all of the local branches on your machines using  <code>git branch </code> <br>
-    If another member has created new remote branches that are not yet on your machine, you can access those branches using <br> <code> git fetch </code>
-    </li>
-</ol>
+## Firmware
+- Change the stepper motors pinout definition to match your wiring
+- Flash the firmware to arduino
+- use the software to interface with the arm, or use these commands to control the motors directly
+    - G01 X Y Z A B R
+        - Move the upper wrist motor to X steps
+        - Move the lower wrist motor to Y steps
+        - Move the elbow motor to Z steps
+        - Move the shoulder motor to A steps
+        - Move the base motor to B steps
+        - Move the rail motor to R steps
+    - SX n
+        - Set the maximum speed of the upper wrist motor to n steps/sec
+    - SY n
+        - Set the maximum speed of the lower wrist motor to n steps/sec
+    - SZ n
+        - Set the maximum speed of the elbow motor to n steps/sec
+    - SA n
+        - Set the maximum speed of the base motor to n steps/sec
+    - SB n
+        - Set the maximum speed of the base motor to n steps/sec
+    - SR n
+        - Set the maximum speed of the rail motor to n steps/sec
+    - Zero
+        - Set the current position of all motors to 0
 
+## Software
+- Make sure that the URDF model is in the same directory as the python script
+- Change the serial port in the python script to match the port that your arduino is connected to
+- run the python script, and enter your desired X,Y,Z coordinate
+    - Default position is 0 0 0.751
+    - X axis : recommend value between 0 to 1
+    - Y axis : recommend value between -0.4 to 0.4
+    - Z axis : recommend value between 0.2 to 0.751
+- the program will calculate the required steps for each joint, and show the result by graphing the simulated position of the robot arm
+- click anywhere on the graph to continue, the program will send the command to move the robot arm to the desired position
+- enter new coordinates to go to new position
+- or return the system to default position before terminating the program
 
-## Pull request
-<ol>
-    <li>
-    First, stage your changes by using <code>git add &lt;changed_file&gt; </code> <br>
-    Example: <code>git add /C++/my_code.cpp </code> <br>
-    Do not use <code>git add .</code> because it will stage unnecessary files. A goode IDE can help you with this.
-    </li>
-    <li>
-    Commit by using <code>git commit -m "My message"</code>. Give it a meaningful one such as "Fixed bug for input" instead of "Minor fix"
-    </li>
-    <li>
-    Rebasing from main meaning you update your code. This is due to because during you work on your branch, other people
-    have made updates. To do this, use <code>git rebase -i origin/main</code>. After that, type <code>:wq</code> and Enter.
-    This is Vim syntax, ask me for more details about this step.
-    </li>
-    <li>
-    Push your changes via <code>git push</code>.
-    </li>
-    <li>
-    On the project page [Here]. Click on Pull Request tab. Click on New Pull Request
-    button, and create one from your branch to main.
-    </li>
-    <li>
-    Ping on Discord to get it reviewed.
-    </li>
-</ol>
-
-___
-
-# Compile and execute guide
-
-## For C++ code
-<ol>
-    <li>
-    In the C++ directory, you will find the Makefile. In line 38, change it to <code>MODE := $(RELEASE)</code> or <code>MODE := $(DEBUG)</code> as you wish.
-    Currently, we only support these 2 modes. Note that to use GDB to debug, you must use Debug profile.
-    </li>
-    <li>
-    In the same directory use <code>make</code> the compile the code; <code>make clean</code> to clean everything.
-    </li>
-    <li>
-    If the process run successfully, you will find a new binary in <code>bin/</code>. To execute, run <code>./bin/qpp.exe</code>.
-    </li>
-</ol>
